@@ -33,29 +33,30 @@ while True:
             window['-GOAL-COMBO-'].update(values=dict['Length'], value='Mile - mi', size=(15,3))
     
     if event == 'btn2' and values['-SOURCE-INPUT-']:
-        input = int(values['-SOURCE-INPUT-'])
+        input = values['-SOURCE-INPUT-']
+        if input.isnumeric():
+            input = int(input)
+            if values['-SOURCE-COMBO-'] == values['-GOAL-COMBO-']:
+                print_text(input)
 
-        if values['-SOURCE-COMBO-'] == values['-GOAL-COMBO-']:
-            print_text(input)
+            elif values['-UNIT-COMBO-'] == 'Mass':
+                if values['-SOURCE-COMBO-'] == 'Kilogram - kg' and values['-GOAL-COMBO-'] == 'Pound - lb':
+                    print_text(input*2.20462262)
+                elif values['-SOURCE-COMBO-'] == 'Pound - lb' and values['-GOAL-COMBO-'] == 'Kilogram - kg':
+                    print_text(input*0.45359237)
 
-        elif values['-UNIT-COMBO-'] == 'Mass':
-            if values['-SOURCE-COMBO-'] == 'Kilogram - kg' and values['-GOAL-COMBO-'] == 'Pound - lb':
-                print_text(input*2.20462262)
-            elif values['-SOURCE-COMBO-'] == 'Pound - lb' and values['-GOAL-COMBO-'] == 'Kilogram - kg':
-                print_text(input*0.45359237)
-
-        elif values['-UNIT-COMBO-'] == 'Length':
-            if values['-SOURCE-COMBO-'] == 'Kilometer - km' and values['-GOAL-COMBO-'] == 'Meter - m':
-                print_text(input*1000)
-            elif values['-SOURCE-COMBO-'] == 'Kilometer - km' and values['-GOAL-COMBO-'] == 'Mile - mi':
-                print_text(input*0.621371192)
-            elif values['-SOURCE-COMBO-'] == 'Meter - m' and values['-GOAL-COMBO-'] == 'Kilometer - km':
-                print_text(input*0.001)
-            elif values['-SOURCE-COMBO-'] == 'Meter - m' and values['-GOAL-COMBO-'] == 'Mile - mi':
-                print_text(input*0.000621371192)
-            elif values['-SOURCE-COMBO-'] == 'Mile - mi' and values['-GOAL-COMBO-'] == 'Kilometer - km':
-                print_text(input*1.609344)
-            elif values['-SOURCE-COMBO-'] == 'Mile - mi' and values['-GOAL-COMBO-'] == 'Meter - m':
-                print_text(input*1609.344)
+            elif values['-UNIT-COMBO-'] == 'Length':
+                if values['-SOURCE-COMBO-'] == 'Kilometer - km' and values['-GOAL-COMBO-'] == 'Meter - m':
+                    print_text(input*1000)
+                elif values['-SOURCE-COMBO-'] == 'Kilometer - km' and values['-GOAL-COMBO-'] == 'Mile - mi':
+                    print_text(input*0.621371192)
+                elif values['-SOURCE-COMBO-'] == 'Meter - m' and values['-GOAL-COMBO-'] == 'Kilometer - km':
+                    print_text(input*0.001)
+                elif values['-SOURCE-COMBO-'] == 'Meter - m' and values['-GOAL-COMBO-'] == 'Mile - mi':
+                    print_text(input*0.000621371192)
+                elif values['-SOURCE-COMBO-'] == 'Mile - mi' and values['-GOAL-COMBO-'] == 'Kilometer - km':
+                    print_text(input*1.609344)
+                elif values['-SOURCE-COMBO-'] == 'Mile - mi' and values['-GOAL-COMBO-'] == 'Meter - m':
+                    print_text(input*1609.344)
 
 window.close()
