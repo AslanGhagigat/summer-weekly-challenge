@@ -1,7 +1,4 @@
 import PySimpleGUI as sg
-from cycler import V
-from numpy import source
-from traitlets import default
 
 unit_combo = ['Length', 'Mass'] #, 'Speed', 'Area'
 dict = {'Length': ['Kilometer - km', 'Meter - m', 'Mile - mi'], 'Mass': ['Kilogram - kg', 'Pound - lb']}
