@@ -18,7 +18,7 @@ def print_text(n: float):
 while True:
     event, values = window.read()
     
-    if event == sg.WIN_CLOSED:
+    if event in sg.WIN_CLOSED:
         break
     
     if event == 'btn1':
