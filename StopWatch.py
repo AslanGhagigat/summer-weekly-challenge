@@ -6,7 +6,7 @@ sg.theme('black')
 layout = [
     [sg.Push(),sg.Image('Cross.png', key='-CLOSE-', pad=0, enable_events=True,)],
     [sg.VPush()],
-    [sg.Text('Timer', font = "Young 50", key='-TIME-')],
+    [sg.Text('Timer', font = "Young 40", key='-TIME-')],
     [
         sg.Button('Start', button_color=('#ffffff','#ff0000'), border_width=0, key='-STARTSTOP-'),
         sg.Button('Lap', button_color=('#ffffff','#ff0000'), border_width=0, key='-LAP-', visible= False)
@@ -20,6 +20,7 @@ window = sg.Window("Stopwatch", layout, size=(300,300), no_titlebar= True,elemen
 start_time = 0
 active = False
 lap_time = ''
+lap_count = 1
 
 while True:
     event, values = window.read(timeout= 10)
@@ -40,6 +41,7 @@ while True:
                 window['-STARTSTOP-'].update('Start')
                 lap_time = ''
                 window['-LAPTIME-'].update(lap_time)
+                lap_count = 1
                 start_time = 0
             # Start Timer
             else:
@@ -50,8 +52,9 @@ while True:
         
     
     if event == '-LAP-':
-        lap_time += str(round(time() - start_time, 1)) + '\n'
+        lap_time += f'{lap_count} | {str(round(time() - start_time, 1))}\n'
         window['-LAPTIME-'].update(lap_time)
+        lap_count += 1
         
     if active:
         elapsed_time = round(time() - start_time, 1)
