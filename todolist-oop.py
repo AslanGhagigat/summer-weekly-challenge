@@ -1,3 +1,8 @@
+# Install PyInputPlus with:
+#       pip install PyInputPlus
+import pyinputplus as pyip
+
+
 class TodoList:
     def __init__(self):
         self.tasks = {}
@@ -29,39 +34,33 @@ class TodoList:
 
 todo = TodoList()
 
-input_text = """add task :        To add task.
-remove task :     To remove task.
-complete task :   To change the status of the task.
-show todolist :   To Show all of task in todolist.
-quit :            To quit cli app.
-
-Please input the desired operation: """
-
 while True:
-    user_input = input(input_text)
+    user_input = pyip.inputMenu(
+        ['add task', 'remove task', 'complete task', 'show todolist', 'quit'],
+        numbered=True,
+        prompt='Please select operation\n'
+    )
+    print('--------------------------------------')
+    print(f'Your operation is "{user_input}"')
 
     match user_input:
         case 'add task':
-            print()
             task_title = input("Plaese input task title: ")
             todo.add_task(task_title)
-            print()
+            print('--------------------------------------')
         case 'remove task':
-            print()
             task_title = input("Plaese input task title: ")
             todo.remove_task(task_title)
-            print()
+            print('--------------------------------------')
         case 'complete task':
             todo.unfinished_tasks()
-            print()
+            print('--------------------------------------')
             task_title = input("Plaese input task title: ")
             todo.task_complete(task_title)
-            print()
+            print('--------------------------------------')
         case 'show todolist':
             todo.show_tasks()
-            print()
+            print('--------------------------------------')
         case 'quit':
             print('Thanks!')
             break
-        case _:
-            print("Please input right operation")
