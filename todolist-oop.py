@@ -28,8 +28,10 @@ class TodoList:
     def show_tasks(self):
         print("Tasks: ")
         for task in self.tasks:
-            print(
-                f"Task: {task} -> [{(u'\u2713') if self.tasks[task] else (u'\u2717')}]")
+            if self.tasks[task]:
+                print(f"Task: {task} -> [\u2713]")
+            else:
+                print(f"Task: {task} -> [\u2717]")
 
 
 todo = TodoList()
