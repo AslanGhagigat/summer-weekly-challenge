@@ -29,7 +29,7 @@ full_input = ''
 while True:
     event, values = window.read()
     
-    if event in sg.WINDOW_CLOSED:
+    if event == sg.WINDOW_CLOSED:
         break
     
     if event in theme_menu[1]:

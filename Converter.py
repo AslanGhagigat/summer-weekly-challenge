@@ -1,34 +1,45 @@
 import PySimpleGUI as sg
 
-unit_combo = ['Length', 'Mass'] #, 'Speed', 'Area'
-dict = {'Length': ['Kilometer - km', 'Meter - m', 'Mile - mi'], 'Mass': ['Kilogram - kg', 'Pound - lb']}
+unit_combo = ['Length', 'Mass']  # , 'Speed', 'Area'
+dict = {'Length': ['Kilometer - km', 'Meter - m',
+                   'Mile - mi'], 'Mass': ['Kilogram - kg', 'Pound - lb']}
 source_combo = []
 goal_combo = []
 layout = [
-    [sg.Text("Please select Unit :"), sg.Combo(unit_combo, key='-UNIT-COMBO-', readonly=True), sg.Button('Submit', key='btn1')],
-    [sg.Combo(values= source_combo, key='-SOURCE-COMBO-', size=(15,3), readonly= True), sg.Input(key= '-SOURCE-INPUT-', size=(25,3)), sg.Button('Convert', key='btn2')],
-    [sg.Combo(values= goal_combo, key='-GOAL-COMBO-', size=(15,3), readonly= True), sg.Text(key= '-GOAL-TEXT-')]
+    [sg.Text("Please select Unit :"), sg.Combo(
+        unit_combo, key='-UNIT-COMBO-', readonly=True), sg.Button('Submit', key='btn1')],
+    [sg.Combo(values=source_combo, key='-SOURCE-COMBO-', size=(15, 3), readonly=True),
+     sg.Input(key='-SOURCE-INPUT-', size=(25, 3)), sg.Button('Convert', key='btn2')],
+    [sg.Combo(values=goal_combo, key='-GOAL-COMBO-', size=(15, 3),
+              readonly=True), sg.Text(key='-GOAL-TEXT-')]
 ]
 
-window = sg.Window("Converter", layout, size=(400,110))
+window = sg.Window("Converter", layout, size=(400, 110))
+
 
 def print_text(n: float):
-    window['-GOAL-TEXT-'].update(f'Answer is => {n:.2f} {values['-GOAL-COMBO-'][-2:]}')
+    answer = values['-GOAL-COMBO-'][-2:]
+    window['-GOAL-TEXT-'].update(f'Answer is => {n:.2f} {answer}')
+
 
 while True:
     event, values = window.read()
-    
-    if event in sg.WIN_CLOSED:
+
+    if event == sg.WIN_CLOSED:
         break
-    
+
     if event == 'btn1':
         if values['-UNIT-COMBO-'] == 'Mass':
-            window['-SOURCE-COMBO-'].update(values=dict['Mass'], value='Kilogram - kg', size=(15,3))
-            window['-GOAL-COMBO-'].update(values=dict['Mass'], value='Pound - lb', size=(15,3))
+            window['-SOURCE-COMBO-'].update(values=dict['Mass'],
+                                            value='Kilogram - kg', size=(15, 3))
+            window['-GOAL-COMBO-'].update(values=dict['Mass'],
+                                          value='Pound - lb', size=(15, 3))
         elif values['-UNIT-COMBO-'] == 'Length':
-            window['-SOURCE-COMBO-'].update(values=dict['Length'], value='Kilometer - km', size=(15,3))
-            window['-GOAL-COMBO-'].update(values=dict['Length'], value='Mile - mi', size=(15,3))
-    
+            window['-SOURCE-COMBO-'].update(values=dict['Length'],
+                                            value='Kilometer - km', size=(15, 3))
+            window['-GOAL-COMBO-'].update(values=dict['Length'],
+                                          value='Mile - mi', size=(15, 3))
+
     if event == 'btn2' and values['-SOURCE-INPUT-']:
         input = values['-SOURCE-INPUT-']
         if input.isnumeric():
